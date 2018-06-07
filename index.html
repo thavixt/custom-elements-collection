@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML5 Custom Elements</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+
+    <div class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+
+    <nav>
+        <div>
+            <h2>Table of Contents</h2>
+        </div>
+        <h3>Introduction</h3>
+        <ul>
+            <li>
+                <a href="#how-to">How to use</a>
+            </li>
+        </ul>
+        <h3>Collection</h3>
+        <ul>
+            <li>
+                <a href="#num-counter">num-counter</a>
+            </li>
+            <li>
+                <a href="#digital-clock">digital-clock</a>
+            </li>
+            <li>
+                <a href="#current-date">current-date</a>
+            </li>
+            <li>
+                <a href="#modal-window">modal-window</a>
+            </li>
+            <li>
+                <a href="#image-preview">image-preview</a>
+            </li>
+            <li>
+                <a href="#placeholder-div">placeholder-div</a>
+            </li>
+            <li>
+                <a href="#placeholder-img">placeholder-img</a>
+            </li>
+            <li>
+                <a href="#tooltip-wrapper">tooltip-wrapper</a>
+            </li>
+            <li>
+                <a href="#textarea-autosize">textarea-autosize</a>
+            </li>
+            <li>
+                <a href="#img-carousel">img-carousel</a>
+            </li>
+            <li>
+                <a href="#confirm-link">confirm-link</a>
+            </li>
+            <li>
+                <a href="#input-history">input-history</a>
+            </li>
+            <li>
+                <a href="#input-switch">input-switch</a>
+            </li>
+        </ul>
+        <h3>Relevant links</h3>
+        <ul>
+            <li>
+                <a href="https://www.w3.org/TR/custom-elements/" target="_blank" rel="noopener">Custom Elements - w3.org</a>
+            </li>
+            <li>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements" target="_blank" rel="noopener">Using custom elements - MDN</a>
+            </li>
+            <li>
+                <a href="https://developers.google.com/web/fundamentals/web-components/customelements" target="_blank" rel="noopener"> Custom Elements v1: Reusable Web Components - Google Developers</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="fade"></div>
+
+    <div id="content">
+
+        <header>
+            <div>
+                <h1>HTML5 Custom Elements Collection</h1>
+
+                <p>This page contains a list of (somewhat) useful or interesting Custom Elements.
+                    <br/>Include the Javascript of the desired element in your page, and use the HTML and/or JS snippets below each element.</p>
+                <p>The code was created to conform to the HTML5 Custom Elements API as of May, 2018.</p>
+
+                <h2 id="how-to">How to use them</h2>
+                <p>All you have to do is import the class definitions in your main script.</p>
+                <p>Assuming a project structure like this;</p>
+                <pre class="lighter">root
+    > js
+        > customelements
+            - counter.js 
+            - ...
+            - ...
+        - main.js
+    - index.html</pre>
+                <p>All you have to do to use the Counter element is to ...</p>
+                <pre class="prettyprint linenums lang-html lighter">&lt;!-- set your main script reference to type="module" -->
+&lt;script scr="js/main.js" type="module" /></pre>
+                <pre class="prettyprint linenums lang-js lighter">// import the desired element in main.js
+import "./customelements/counter.js"</pre>
+                <pre class="prettyprint linenums lang-html lighter">&lt;!-- and use the defined custom element as any other HTML element -->
+&lt;num-counter counter-step="1">&lt;/num-counter></pre>
+
+                <!-- <h2>Styling</h2>
+            <p>If you're not happy with the styling of a component, you can (theoretically) dip into the underlying Shadow DOM in the DevTools, find the desired elements/selectors and apply your own CSS rules. If the DevTools won't give you the appropriate CSS selectors that include the Shadow DOM, it shouldn't be that hard to figure it out by yourself.
+                <a href="https://www.w3.org/TR/css-scoping-1/#shadow-dom" target="_blank" rel="noopener">Here's the spec.</a>
+            </p>
+            <p>Some element will provide named
+                <em>parts</em> explicitly to make them styling easier via simple CSS selectors. This doesn't seem to work yet. -
+                <a href="https://tabatkins.github.io/specs/css-shadow-parts/#part-attr">spec.</a>
+            </p>
+    
+            <p>
+                <code>::shadow</code> also doesn't seem to work yet. -
+                <a href="https://www.w3.org/TR/css-scoping-1/#shadow-pseudoelement">spec.</a>
+            </p>
+    
+            <p>
+                <strong>Currently</strong>, I can't find a way to style custom element from the outside.</p>
+    
+            <h3>Example</h3>
+            <p>Let's try customizing our Counter element we just imported:</p>
+            <pre class="prettyprint linenums lang-css lighter">we cant</pre> -->
+            </div>
+        </header>
+
+        <main>
+
+            <div id="num-counter">
+                <h2>num-counter</h2>
+                <num-counter counter-step="1"></num-counter>
+                <num-counter counter-step="5"></num-counter>
+                <num-counter counter-step="25"></num-counter>
+                <div>
+                    <table>
+                        <tr>
+                            <td colspan="5">Attributes</td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Optional</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>counter-step</td>
+                            <td>number</td>
+                            <td>"1"</td>
+                            <td>optional</td>
+                            <td>amount to increment by on click</td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <pre class="prettyprint linenums lang-html">&lt;num-counter counter-step="1">&lt;/num-counter>
+&lt;num-counter counter-step="5">&lt;/num-counter>
+&lt;num-counter counter-step="25">&lt;/num-counter></pre>
+                </div>
+            </div>
+
+
+
+
+            <div id="digital-clock">
+                <h2>digital-clock</h2>
+                <digital-clock></digital-clock>
+                <br/>
+                <digital-clock clock-seconds="false"></digital-clock>
+                <div>
+                    <table>
+                        <tr>
+                            <td colspan="5">Attributes</td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Optional</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>clock-seconds</td>
+                            <td>boolean</td>
+                            <td>"true"</td>
+                            <td>optional</td>
+                            <td>show or hide the seconds (hh:mm:ss)</td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <pre class="prettyprint linenums lang-html">&lt;!-- hh:mmm:ss -->
+&lt;digital-clock>&lt;/digital-clock>
+&lt;!-- hh:mm -->
+&lt;digital-clock clock-seconds="false">&lt;/digital-clock></pre>
+                </div>
+            </div>
+
+
+
+
+            <div id="current-date">
+                <h2>current-date</h2>
+                <current-date></current-date>
+                <br/>
+                <current-date date-string="true"></current-date>
+                <br/>
+                <current-date date-string="true" date-timestamp="1231231231"></current-date>
+                <div>
+                    <table>
+                        <tr>
+                            <td colspan="5">Attributes</td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Optional</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>date-string</td>
+                            <td>boolean</td>
+                            <td>"false"</td>
+                            <td>optional</td>
+                            <td>show the date as a localized date string
+                                <br/>(based on browser preferences)</td>
+                        </tr>
+                        <tr>
+                            <td>date-timestamp</td>
+                            <td>number</td>
+                            <td></td>
+                            <td>optional</td>
+                            <td>use a UNIX timestamp instead of the current date</td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <pre class="prettyprint linenums lang-html">&lt;!-- numerical date -->
+&lt;current-date>&lt;/current-date>
+&lt;!-- show as a localized string -->
+&lt;current-date date-string="true">&lt;/current-date>
+&lt;!-- use a timestamp -->
+&lt;current-date date-string="true" date-timestap="1231231231">&lt;/current-date></pre>
+                </div>
+            </div>
+
+
+
+
+            <div id="modal-window">
+                <h2>modal-window</h2>
+                <modal-window modal-accept="Sure!" modal-cancel="Naaah" modal-background="true">
+                    <strong>Hi! This is a modal.</strong>
+                    <p>Here, you can write anything you want your users to know before proceeding forward.</p>
+                    <em>Maybe answer some questions as well?</em>
+                </modal-window>
+                <button id="open-modal-window">Open modal</button>
+                <div>
+                    <table>
+                        <tr>
+                            <td colspan="5">Attributes</td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Optional</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>modal-accept</td>
+                            <td>string</td>
+                            <td>"Accept"</td>
+                            <td>required</td>
+                            <td>text to use for the
+                                <em>accept</em> button</td>
+                        </tr>
+                        <tr>
+                            <td>modal-cancel</td>
+                            <td>string</td>
+                            <td>"Cancel"</td>
+                            <td>optional</td>
+                            <td>text to use for the
+                                <em>cancel</em> button
+                                <br/>
+                                <u>If emitted</u>, the modal will not have a cancel button
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>modal-background</td>
+                            <td>boolean</td>
+                            <td>"false"</td>
+                            <td>optional</td>
+                            <td>allow the background to fade</td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <pre class="prettyprint linenums lang-html">&lt;modal-window modal-accept="Sure!" modal-cancel="Naaah" modal-background="true">
+    &lt;strong>Hi! This is a modal.&lt;/strong>
+    &lt;p>Here, you can write anything you want 
+    your users to know before proceeding forward.&lt;/p>
+    &lt;em>Maybe answer some questions as well?&lt;/em>
+&lt;/modal-window></pre>
+                    <pre class="prettyprint linenums lang-js">let myModal = document.getElementsByTagName("modal-window")[0];
+
+// Add callback functions to the buttons (accept, cancel)
+myModal.defineCallbacks(
+    function () {
+        console.log("modal-window: 'OK'");
+    },
+    function () {
+        console.log("modal-window: 'cancel'");
+    }
+);
+
+// Test button
+document.getElementById("open-modal-window")
+    .addEventListener("click", function () {
+        myModal.showModal();
+    });</pre>
+                </div>
+            </div>
+
+
+
+
+            <div id="image-preview">
+                <h2>image-preview</h2>
+                <image-preview></image-preview>
+                <div>
+                    <table>
+                        <tr>
+                            <td colspan="5">Attributes</td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Optional</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td colspan="5" style="text-align: center">
+                                <em>no custom attributes defined yet</em>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <pre class="prettyprint linenums lang-html">&lt;image-preview>&lt;/image-preview></pre>
+                </div>
+                <div>
+                    <pre class="prettyprint linenums lang-js">// Accessing the input file:
+let myImagePreview = document.getElementsByTagName("image-preview")[0];
+let inputFile = myImagePreview.file;</pre>
+                </div>
+            </div>
+
+
+
+
+            <div id="placeholder-div">
+                <h2>placeholder-div</h2>
+                <placeholder-div data-url="https://baconipsum.com/api/?type=all-meat&paras=3&format=html" data-delay="500" data-paragraphs="3" data-line-min="3" data-line-max="6"></placeholder-div>
+                <div>
+                    <table>
+                        <tr>
+                            <td colspan="5">Attributes</td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Optional</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>data-url</td>
+                            <td>string</td>
+                            <td></td>
+                            <td>required</td>
+                            <td>URL to load the actual data via
+                                <em>fetch()</em>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>data-delay</td>
+                            <td>number</td>
+                            <td>"500"</td>
+                            <td>optional</td>
+                            <td>delay in milliseconds before the data is loaded when the element is in the viewport</td>
+                        </tr>
+                        <tr>
+                            <td>data-paragraphs</td>
+                            <td>number</td>
+                            <td></td>
+                            <td>required</td>
+                            <td>number of placeholder paragraphs</td>
+                        </tr>
+                        <tr>
+                            <td>data-line-min</td>
+                            <td>number</td>
+                            <td></td>
+                            <td>required</td>
+                            <td>minimum number of lines per paragraph</td>
+                        </tr>
+                        <tr>
+                            <td>data-line-max</td>
+                            <td>number</td>
+                            <td></td>
+                            <td>required</td>
+                            <td>maximum number of lines per paragraph</td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <pre class="prettyprint linenums lang-html">&lt;placeholder-div 
+    data-url="https://baconipsum.com/api/?type=all-meat&amp;paras=1&amp;format=html"
+    data-delay="500"
+    data-paragraphs="3"
+    data-line-min="3" 
+    data-line-max="6">
+&lt;/placeholder-div></pre>
+                </div>
+            </div>
+
+
+
+
+            <div id="placeholder-img">
+                <h2>placeholder-img</h2>
+                <placeholder-img data-placeholder="https://picsum.photos/300/300?image=0&blur" data-src="https://picsum.photos/300/300?image=10" data-delay="1000" data-transition="1000" />
+                </placeholder-img>
+                <div>
+                    <table>
+                        <tr>
+                            <td colspan="5">Attributes</td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Optional</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>data-placeholder</td>
+                            <td>string</td>
+                            <td></td>
+                            <td>required</td>
+                            <td>path to the placeholder image</td>
+                        </tr>
+                        <tr>
+                            <td>data-src</td>
+                            <td>string</td>
+                            <td></td>
+                            <td>required</td>
+                            <td>path to the source image</td>
+                        </tr>
+                        <tr>
+                            <td>data-delay</td>
+                            <td>number</td>
+                            <td>"500"</td>
+                            <td>optional</td>
+                            <td>delay in milliseconds before the image is loaded when the element is in the viewport</td>
+                        </tr>
+                        <tr>
+                            <td>data-transition</td>
+                            <td>number</td>
+                            <td>"500"</td>
+                            <td>optional</td>
+                            <td>transition between the images in milliseconds
+                                <br>
+                                <a href="https://caniuse.com/#feat=css-cross-fade" target="_blank" rel="noopener">supported in Chrome and Safari as of May 2018</a>
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <pre class="prettyprint linenums lang-html">&lt;placeholder-img
+    data-placeholder="low-res.jpg"
+    data-src="full-size.png"
+    data-delay="1000"
+    data-transition="1000">
+&lt;/placeholder-img></pre>
+                    <pre class="prettyprint linenums lang-css">placeholder-img {
+    display: block;
+    width: 300px;
+    height: 300px;
+    background-color: rgb(204,204,204); /* just as a fallback */
+    border-radius: 50px;
+}</pre>
+                </div>
+            </div>
+
+
+
+
+            <div id="tooltip-wrapper">
+                <h2>tooltip-wrapper</h2>
+                <tooltip-wrapper original-text="Please don't hover over me. I'm hiding something...">
+                    <strong>Oh no ...</strong>
+                    <br/>I'm revealed!
+                </tooltip-wrapper>
+                <br/>
+                <br/>
+                <em>Important</em>&nbsp;
+                <tooltip-wrapper original-text="<img src='/assets/info.png' style='width:20px;'>">
+                    <strong>Wow!</strong>
+                    <p>This information is
+                        <em>soooo</em> important! Glad I didn't miss this ...</p>
+                    <strong>Wait!</strong> there's more!
+                    <p>... or is there?</p>
+                    <table style="text-align: center">
+                        <thead>
+                            <tr>
+                                <th>Text</th>
+                                <th>Relation</th>
+                                <th>Number</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>One</td>
+                                <td>=</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>Two</td>
+                                <td>&lt;</td>
+                                <td>3</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </tooltip-wrapper>
+                <div>
+                    <table>
+                        <tr>
+                            <td colspan="5">Attributes</td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Optional</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>original-text</td>
+                            <td>string</td>
+                            <td></td>
+                            <td>required</td>
+                            <td>the hoverable text itself, accepts any HTML markup</td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <pre class="prettyprint linenums lang-html">&lt;tooltip-wrapper original-text="Please don't hover over me. I'm hiding something...">
+    &lt;strong>Oh no ...&lt;/strong>
+    &lt;br>I'm revealed!
+&lt;/tooltip-wrapper>
+
+&lt;!-- tooltip with a bit more HTML -->
+&lt;em>Important&lt;/em>&nbsp;
+&lt;tooltip-wrapper original-text="&lt;img src='/assets/info.png' style='width:20px;'&gt;">
+    &lt;strong>Wow!&lt;/strong>
+    &lt;p>This information is &lt;em>soooo&lt;/em> important! Glad I didn't miss this ...&lt;/p>
+    &lt;strong>Wait!&lt;/strong> there's more!
+    &lt;p>... or is there?&lt;/p>
+    &lt;table style="text-align: center">
+        &lt;!-- bla bla table html -->
+    &lt;/table>
+&lt;/tooltip-wrapper></pre>
+                    <p>NOTE: this element is a bit messy and will be refactored later.</p>
+                </div>
+            </div>
+
+
+
+
+            <div id="textarea-autosize">
+                <h2>textarea-autosize</h2>
+                <textarea-autosize autosize-width="200px" autosize-height="20px" autosize-max-height="300px">
+                    Express your thoughts ...
+                </textarea-autosize>
+                <p>
+                    <strong>
+                        auto downsize ?!
+                    </strong>
+                </p>
+                <div>
+                    <table>
+                        <tr>
+                            <td colspan="5">Attributes</td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Optional</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>autosize-width</td>
+                            <td>number</td>
+                            <td>"300"</td>
+                            <td>optional</td>
+                            <td>min-width of the textarea</td>
+                        </tr>
+                        <tr>
+                            <td>autosize-height</td>
+                            <td>number</td>
+                            <td>"20"</td>
+                            <td>optional</td>
+                            <td>min-height of the textarea</td>
+                        </tr>
+                        <tr>
+                            <td>autosize-max-height</td>
+                            <td>number</td>
+                            <td>"100"</td>
+                            <td>optional</td>
+                            <td>max-height of the textarea</td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <pre class="prettyprint linenums lang-html">&lt;textarea-autosize 
+    autosize-width="100%"
+    autosize-height="30px"
+    autosize-max-height="300px">
+    Express your thoughts ...
+&lt;/textarea-autosize></pre>
+                </div>
+            </div>
+
+
+
+
+            <div id="img-carousel">
+                <h2>img-carousel</h2>
+                <img-carousel img-background="#112" img-size="cover" img-transition="400">
+                    <img src="https://picsum.photos/1000/600?image=10" img-caption="First slide">
+                    <img src="https://picsum.photos/1000/450?image=12" img-caption="Second slide. So cool." hidden>
+                    <img src="https://picsum.photos/1000/400?image=14" img-caption="Last slide, go backwards!" hidden>
+                </img-carousel>
+                <div>
+                    <table>
+                        <tr>
+                            <td colspan="5">Attributes</td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Optional</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>img-background</td>
+                            <td>string</td>
+                            <td>"transparent"</td>
+                            <td>optional</td>
+                            <td>background-color of the carousel
+                                <br>accepts any valid CSS color declaration
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>img-size</td>
+                            <td>string</td>
+                            <td>"contain"</td>
+                            <td>optional</td>
+                            <td>Possible values are:
+                                <br>
+                                <strong>contain</strong> - scales the image as large as possible without cropping or stretching the image
+                                <br>
+                                <strong>cover</strong> - scales the image as large as possible without stretching the image. If the proportions of the image differ from the element, it is cropped either vertically or horizontally so that no empty space remains
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>img-caption</td>
+                            <td>string</td>
+                            <td></td>
+                            <td>optional</td>
+                            <td>caption text to use at the bottom of the image</td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <pre class="prettyprint linenums lang-html">&lt;img-carousel img-background="#112" img-size="cover" img-transition="400">
+    &lt;img src="https://picsum.photos/1000/600?image=10" img-caption="First slide" hidden>
+    &lt;img src="https://picsum.photos/1000/450?image=12" img-caption="Second slide" hidden>
+    &lt;img src="https://picsum.photos/1000/300?image=14" img-caption="Last slide, go backwards!" hidden>
+&lt;/img-carousel></pre>
+                </div>
+            </div>
+
+
+
+
+            <div id="confirm-link">
+                <h2>confirm-link</h2>
+                <a href="https://developers.google.com/web/fundamentals/web-components/" target="_blank" is="confirm-link">Click me to travel far away!</a>
+                <div>
+                    <table>
+                        <tr>
+                            <td colspan="5">Attributes</td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Optional</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td colspan="5" style="text-align: center">
+                                <em>no custom attributes defined yet</em>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <pre class="prettyprint linenums lang-html">
+&lt;a href="https://developers.google.com/web/fundamentals/web-components/" target="_blank" is="confirm-link">Click me to travel far away!&lt;a></pre>
+                </div>
+            </div>
+
+
+
+
+            <div id="input-history">
+                <h2>input-history</h2>
+                <input type="text" is="history-input">
+                <p>
+                    <strong>
+                        history length attribute !!
+                        <br>-1 = infinite
+                    </strong>
+                </p>
+                <div>
+                    <table>
+                        <tr>
+                            <td colspan="5">Attributes</td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Optional</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td colspan="5" style="text-align: center">
+                                <em>no custom attributes defined yet</em>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <pre class="prettyprint linenums lang-html">
+&lt;input type="text" is="history-input"></pre>
+                </div>
+            </div>
+
+
+
+
+            <div id="input-switch">
+                <h2>input-switch</h2>
+                <ul style="padding:0;margin-top:0;">
+                    <li class="v-center">
+                        <input-switch checked></input-switch> active / true
+                    </li>
+                    <li class="v-center">
+                        <input-switch></input-switch> active / false
+                    </li>
+                    <li class="v-center">
+                        <input-switch disabled checked></input-switch> disabled / true
+                    </li>
+                    <li class="v-center">
+                        <input-switch disabled></input-switch> disabled / false
+                    </li>
+                </ul>
+                <p>Use any color:</p>
+                <input-switch class="red" checked></input-switch>
+                <input-switch class="blue" checked></input-switch>
+                <input-switch class="black" checked></input-switch>
+                <input-switch class="yellow" checked></input-switch>
+                <div>
+                    <table>
+                        <tr>
+                            <td colspan="5">Attributes</td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Optional</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td colspan="5" style="text-align: center">
+                                <em>no custom attributes defined yet</em>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <pre class="prettyprint linenums lang-html">&lt;!-- NOTE: this element is NOT self-closing! -->
+&lt;input-switch>&lt;/input-switch>
+
+&lt;!-- use the familiar checked and disabled attributes -->
+&lt;input-switch checked>&lt;/input-switch>
+&lt;input-switch disabled>&lt;/input-switch>
+&lt;input-switch disabled checked>&lt;/input-switch></pre>
+                </div>
+                <div>
+                    <pre class="prettyprint linenums lang-css">/* set the color attribute
+to change the active color */
+input-switch { 
+    color: rgb(78, 218, 78); 
+}</pre>
+                </div>
+                <div>
+                    <pre class="prettyprint linenums lang-js">let mySwitch = document.getElementByTagName("input-switch")[0];
+
+// Use getters and setters
+mySwitch.disabled = true;                   // -> false
+console.log(mySwitch.checked);              // -> true
+mySwitch.checked = false;                   // -> false
+
+// Or use getAttribute(), setAttribute() and removeAttribute()
+mySwitch.setAttribute("checked", "true");   // -> "true"
+mySwitch.getAttribute("disabled");          // -> "true"
+mySwitch.removeAttribute("disabled");</pre>
+                </div>
+            </div>
+
+
+
+
+
+
+        </main>
+
+        <footer>
+            <div>
+                <p>Made by Peter Komlósi -
+                    <a href="https://komlosidev.net/" target="_blank" rel="noopener">
+                        personal site</a>
+                    -
+                    <a href="https://github.com/thavixt" target="_blank" rel="noopener">
+                        github</a>
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- entry point -->
+    <script defer src="/js/main.js" type="module"></script>
+    <!-- google code prettify -->
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=desert"></script>
+</body>
+
+</html>
