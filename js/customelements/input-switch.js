@@ -1,7 +1,3 @@
-// @ts-check
-
-
-
 export default class InputSwitch extends HTMLElement {
     // Specify observed attributes so that attributeChangedCallback will work
     static get observedAttributes() {

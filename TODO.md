@@ -25,7 +25,14 @@
 
 ## Ideas
 
-[ ] checkbox flip switch
+
+[ ] simple bar charts
+
+[ ] hamburger menu / sidebar
+
+[ ] progress bar
+
+[ ] alert box
 
 [ ] masked input
 
@@ -33,11 +40,11 @@
 
 - https://github.com/insin/inputmask-core
 
-[ ] alert box
+[x] checkbox flip switch
 
 [x] image carousel
 
-[ ] input history
+[x] input history
 
 
 
