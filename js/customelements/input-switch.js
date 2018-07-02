@@ -25,7 +25,7 @@ export default class InputSwitch extends HTMLElement {
             :host > div {
                 display: flex;
                 align-items: center;
-                width: 36px;
+                width: 30px;
                 height: 22px;
                 background-color: #ccc;
                 border-radius: 20px;
@@ -46,7 +46,7 @@ export default class InputSwitch extends HTMLElement {
             }
             :host > div.checked > div {
                 /* border: 1px solid ${this.accentColor}; */
-                transform: translateX(100%);
+                transform: translateX(66%);
             }
 
             /* disabled status */

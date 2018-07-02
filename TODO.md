@@ -1,28 +1,19 @@
-# Website todo list
+# Collection of HTML5 Custom Elements
 
-- [ ] more/better example code
-- [ ] provide an example of styling the elements
-    - expose parts of the element with the :host::part(partname) syntax
-    - for example:
-        div part="preview"
-        selector: :host::part(preview)
-    - https://youtu.be/7CUO7PyD5zA?t=27m7s
-- [ ] write a README.md about the using the Custom Elements API
-
-Completed:
-- [x] list default attributes
-- [x] mobile layout & sidebar nav
-- [x] make the site nicer
+This is a personal collection of (somewhat) useful components and simpler elements created by me over a period of time.
 
 
 
 # Custom element/component ideas
 
-
+- [ ] loader/progress bar
+    - based on the native meter element?
+        - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meter
 - [ ] simple bar charts
     - hover effects
     - pass array of data through an attribute?
     - or only init with javascript?
+    - use svg?
 - [ ] hamburger menu / sidebar
 - [ ] progress bar
 - [ ] loader / loading animations
@@ -34,21 +25,34 @@ Completed:
     - https://github.com/insin/inputmask-core
     - this might be too complicated
 
-Completed:
 - [x] checkbox flip switch
 - [x] image carousel
 - [x] input history
 
 
 
-# Further learning
+## Further learning
 
 - use the *slot* api
 - use the *part* api
 - figure out applying CSS from the outer scope
+    - themeing with :host-context(.outsideThemeClass)
+    - use themeing classes with css variables?
 
 
 
-# References
-- - [Google Developers article](https://developers.google.com/web/fundamentals/web-components/customelements)
-- - [MDN docs](https://developer.mozilla.org/en-US/docs/Web/API/Window/customElements)
+
+
+
+## Todo
+
+- [ ] more/better example code
+- [ ] provide an example of styling the elements
+    - https://youtu.be/7CUO7PyD5zA?t=27m7s
+    - https://developers.google.com/web/fundamentals/web-components/shadowdom#stylehooks
+- [ ] write a README.md about the using the Custom Elements API
+
+- [x] list default attributes
+- [x] mobile layout & sidebar nav
+- [x] make the site nicer
+

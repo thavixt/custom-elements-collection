@@ -22,6 +22,7 @@ import "./customelements/tooltip.js";
 import "./customelements/confirm-link.js";
 import "./customelements/input-history.js";
 
+import "./customelements/bar-chart.js";
 
 // modal.js test
 let myModal = document.getElementsByTagName("modal-window")[0];

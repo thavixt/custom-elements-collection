@@ -1,5 +1,5 @@
 :root {
-    --sidebar-width: 220px;
+    --sidebar-width: 300px;
     --sidebar-width-mobile: 270px;
     /* text */
     --text-white: whitesmoke;
@@ -351,7 +351,10 @@ input-switch.yellow {
 
 /* mobile layout */
 
-@media (max-width: 720px) {
+@media screen and (max-width: 720px) {
+    header {
+        padding-top: 2.5em;
+    }
     nav {
         width: var(--sidebar-width-mobile);
         transition: transform 0.3s ease-in-out;
