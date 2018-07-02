@@ -41,9 +41,6 @@ This is a personal collection of (somewhat) useful components and simpler elemen
 
 
 
-
-
-
 ## Todo
 
 - [ ] more/better example code
