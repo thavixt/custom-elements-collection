@@ -9,7 +9,7 @@ This is a personal collection of (somewhat) useful components and simpler elemen
 - [ ] loader/progress bar
     - based on the native meter element?
         - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meter
-- [ ] simple bar charts
+- [ ] WIP simple bar charts
     - hover effects
     - pass array of data through an attribute?
     - or only init with javascript?
@@ -27,7 +27,12 @@ This is a personal collection of (somewhat) useful components and simpler elemen
 
 - [x] checkbox flip switch
 - [x] image carousel
+- [x] file input image preview
+- [x] placeholder image
+- [x] placeholder line/div for text/paragraphs
+- [x] switch (checkbox input)
 - [x] input history
+- [x] digital clock
 
 
 
