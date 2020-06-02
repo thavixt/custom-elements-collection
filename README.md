@@ -39,7 +39,12 @@ This is a personal collection of (somewhat) useful components and simpler elemen
 
 - [x] checkbox flip switch
 - [x] image carousel
+- [x] file input image preview
+- [x] placeholder image
+- [x] placeholder line/div for text/paragraphs
+- [x] switch (checkbox input)
 - [x] input history
+- [x] digital clock
 
 
 
