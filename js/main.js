@@ -17,28 +17,48 @@ import "./customelements/image-placeholder.js";
 import "./customelements/modal.js";
 import "./customelements/text-placeholder.js";
 import "./customelements/tooltip.js";
+import "./customelements/bar-chart.js";
+import "./customelements/line-chart.js";
+import "./customelements/browser-modal.js";
 
 // Extending native elements
 import "./customelements/confirm-link.js";
 import "./customelements/input-history.js";
 
-import "./customelements/bar-chart.js";
 
 // modal.js test
 let myModal = document.getElementsByTagName("modal-window")[0];
 // Add callback functions to the buttons (accept, cancel)
 myModal.defineCallbacks(
-    function () {
+    function() {
         console.log("modal-window: 'OK'");
     },
-    function () {
+    function() {
         console.log("modal-window: 'cancel'");
     }
 );
 // 'Open modal' button
 document.getElementById("open-modal-window")
-    .addEventListener("click", function () {
+    .addEventListener("click", function() {
         myModal.showModal();
+    });
+
+
+
+// browser-modal.js test
+let myBrowserModal = document.getElementsByTagName("browser-modal-window")[0];
+// Add a callback function to the close button
+console.log(myBrowserModal.defineCallbacks)
+myBrowserModal.defineCallbacks(
+    function() {
+        console.log("browser-modal: close");
+    },
+    function() { }
+);
+// 'Open modal' button
+document.getElementById("open-browser-modal-window")
+    .addEventListener("click", function() {
+        myBrowserModal.showModal();
     });
 
 

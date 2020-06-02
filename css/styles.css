@@ -68,7 +68,7 @@ nav {
     height: 100vh;
     background-color: var(--bg-dark-blue);
     color: var(--text-white);
-    padding: 2em 1em 4em 1em;
+    padding: 1em 1em 2em 1em;
     border-right: 1px solid var(--bg-dark-grey);
     overflow-x: hidden;
     overflow-y: auto;
@@ -265,6 +265,10 @@ pre.prettyprint.lang-js::before {
     content: "Javascript";
 }
 
+pre.prettyprint.lang-json::before {
+    content: "JSON";
+}
+
 pre.prettyprint.lang-css::before {
     content: "CSS";
 }
@@ -347,6 +351,12 @@ input-switch.black {
 
 input-switch.yellow {
     color: #e6e218;
+}
+
+bar-chart,
+line-chart {
+    display: block;
+    background-color: white;
 }
 
 /* mobile layout */

@@ -1,5 +1,5 @@
 // modal window
-export default class Modal extends HTMLElement {
+export default class IFrameModal extends HTMLElement {
     constructor() {
         super();
         // shadow root
@@ -165,4 +165,5 @@ export default class Modal extends HTMLElement {
         } */
     }
 }
-window.customElements.define('modal-window', Modal);
+
+window.customElements.define('browswer-modal-window', IFrameModal);

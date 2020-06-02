@@ -1,6 +1,6 @@
 // @ts-check
 
-export default class BarChart extends HTMLElement {
+export default class LineChart extends HTMLElement {
     // Specify observed attributes so that attributeChangedCallback will work
     static get observedAttributes() {
         return ['x'];
@@ -10,6 +10,8 @@ export default class BarChart extends HTMLElement {
         // You must call super() first, since it extends the base HTMLElement class
         super();
         // Set and get any attributes here
+        this._width = parseInt(this.getAttribute("data-width")) || 200;
+        this._height = parseInt(this.getAttribute("data-height")) || 100;
         // Set up Shadow DOM here
         this._shadow = this.attachShadow({
             mode: 'open'
@@ -20,7 +22,7 @@ export default class BarChart extends HTMLElement {
             `:host {
                 display: inline-block;
                 position: relative;
-                width: 500px;
+                width: ${this._width + (30 * 2)}px;
                 height: 100%;
                 padding: 0.5em 2em 1.5em 2em;
             }
@@ -33,36 +35,36 @@ export default class BarChart extends HTMLElement {
             }
             :host > .container {
                 position: relative;
+                width: ${this._width}px;
+                height: ${this._height}px;
             }
-            :host > .container > .chart {
-                display: grid;
-                grid-gap: 5px;
-                grid-auto-flow: column;
-                align-items: end;
-                min-height: 100px;
-                min-width: 100%;
+            :host > .container > svg.chart {
+                display: block;
+                height: 100%;
+                width: 100%;
                 user-select: none;
                 border: 1px solid #bbb;
                 border-width: 0 0 2px 2px;
-                padding: 6px 6px 0 6px;
             }
-            :host .bar {
-                /* min-height: 100%; */
-                position: relative;
-                background-color: firebrick;
+            :host > .container > svg.chart > .graph path {
+                stroke: #aaa;
+                stroke-width: 1px;
+                stroke-linecap: butt;
+                stroke-linejoin: miter;
+                fill: none;
+            }
+            :host > .container > svg.chart > .points g {
+                padding: 10px;
+            }
+            :host > .container > svg.chart > .points ellipse {
                 cursor: pointer;
+                /* fill: #666; */
+                stroke: none;
             }
-            :host .bar::after {
-                content: attr(data-value);
-                position: absolute;
-                width: 100%;
-                bottom: -1.5em;
-                left: 0;
-                text-align: center;
-                font-size: 12px;
-            }
-            :host .bar:hover {
-                background-color: #ccc !important;
+            :host > .container > svg.chart > .points ellipse:hover {
+                fill: whitesmoke;
+                stroke: #333;
+                stroke-width: 1px;
             }
             /* failed to validate data */
             :host > .container.invalid {
@@ -77,7 +79,6 @@ export default class BarChart extends HTMLElement {
                 content: "Failed to validate chart data.";
                 padding: 1em 0;
             }
-            /* min and max values (y-axis) */
             :host .min,
             :host .max {
                 display: block;
@@ -104,9 +105,25 @@ export default class BarChart extends HTMLElement {
         this._title.textContent = this.getAttribute("chart-title") || "";
         this._container = document.createElement("div");
         this._container.classList.add("container");
-        this._chart = document.createElement("div");
+        // chart
+        this._chart = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         this._chart.classList.add("chart");
+        // this._chart.setAttributeNS(null, "xmlns", "http://www.w3.org/2000/svg");
+        // this._chart.setAttributeNS(null, "xmlns:xlink", "http://www.w3.org/1999/xlink");
+        this._chart.setAttributeNS(null, "viewbox", `0 0 ${this._width} ${this._height}`);
+        this._chart.setAttributeNS(null, "x", "0px");
+        this._chart.setAttributeNS(null, "y", "0px");
+        this._chart.setAttributeNS(null, "width", `${this._width}`);
+        this._chart.setAttributeNS(null, "height", `${this._height}`);
         this._container.appendChild(this._chart);
+        // graph
+        this._graph = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        this._graph.classList.add("graph");
+        this._chart.appendChild(this._graph);
+        // points
+        this._points = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        this._points.classList.add("points");
+        this._chart.appendChild(this._points);
         // Append elements to the Shadow DOM
         this._shadow.appendChild(this._title);
         this._shadow.appendChild(this._container);
@@ -131,46 +148,85 @@ export default class BarChart extends HTMLElement {
         this._maximumLabel.textContent = this._maximum.toString();
         this._container.appendChild(min);
         this._container.appendChild(this._maximumLabel);
-        // Create the data points
-        for (const d of this.data) {
-            this._add(d);
-        }
 
+        // Calculate step size and starting position
+        this._calculateStepSize();
+        // Create the data points
+        this._pointPositions = [];
+        for (let i = 0; i < this._data.length; i++) {
+            const dataPoint = this._data[i];
+            this._pointPositions.push(this._add(dataPoint, i));
+
+        }
+        // Create path
+        // console.log(this._pointPositions);
+        this._drawPath();
 
         // Set up any event listeners here
         // ...
     }
 
-    _add(data) {
-        // console.log(data);
-        let el = document.createElement("div");
+    _drawPath() {
+        let el = document.createElementNS("http://www.w3.org/2000/svg", "path");
+
+        let d = "M " + this._pointPositions[0].join(" ");
+        for (let i = 1; i < this._pointPositions.length; i++) {
+            const p = this._pointPositions[i];
+            d += " L " + this._pointPositions[i].join(" ");
+        }
+        // console.log(d);
+        el.setAttributeNS(null, "d", `${d}`);
+        this._graph.appendChild(el);
+    }
+
+    _add(data, idx) {
+        const scalingFactor = (this._height / this._maximum) * 0.95;
+
+        // Create group and add a hover title
+        let group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        let title = document.createElementNS("http://www.w3.org/2000/svg", "title");
+        // Create ellipse
+        let el = document.createElementNS("http://www.w3.org/2000/svg", "ellipse");
+        el.setAttributeNS(null, "rx", "6");
+        el.setAttributeNS(null, "ry", "6");
+
+        let x = this._startPos + (idx * this._stepSize);
+        let y = this._height / 2;
+
         // simple value
         if (!isNaN(data)) {
-            el.setAttribute("data-value", data);
-            el.setAttribute("title", data);
-            el.style.height = (data / this._maximum * 100).toFixed() + "%";
+            el.setAttributeNS(null, "data-value", data);
+            el.setAttributeNS(null, "fill", `#666`);
+            y = this._height - (data * scalingFactor);
+            title.innerHTML = data;
         }
         // object {name, value, color}
         else if (data.hasOwnProperty('value')) {
-            // console.log('object: ', data);
-            el.setAttribute("data-value", data.value);
-            el.style.height = (data.value / this._maximum * 100).toFixed() + "%";
-            // label
+            el.setAttributeNS(null, "data-value", data.value);
+            y = this._height - (data.value * scalingFactor);
             if (data.hasOwnProperty('label')) {
-                el.setAttribute("title", `${data.label} - ${data.value}`);
+                title.innerHTML = `${data.label} - ${data.value}`;
             }
             // color
             if (data.hasOwnProperty('color')) {
-                el.style.backgroundColor = data.color;
+                el.setAttributeNS(null, "fill", `${data.color}`);
+            } else {
+                el.setAttributeNS(null, "fill", `#666`);
             }
         } else {
             throw new Error("Invalid chart data JSON.\nValid data is:\n- an array of numbers,\n- or an array of objects ({label,value,color}).");
-            return false;
         }
-        // Append bar
-        el.classList.add("bar");
-        this._chart.appendChild(el);
-        return el;
+
+        el.setAttributeNS(null, "cx", `${x}`);
+        el.setAttributeNS(null, "cy", `${y}`);
+
+        // Append elements to group
+        group.appendChild(title);
+        group.appendChild(el);
+        // Append group
+        this._points.appendChild(group);
+        // return el;
+        return [x, y]
     }
 
     _calculateMax() {
@@ -192,6 +248,11 @@ export default class BarChart extends HTMLElement {
         }
         // console.info("max is: ", max);
         return max;
+    }
+
+    _calculateStepSize() {
+        this._stepSize = this._width / this._data.length;
+        this._startPos = this._stepSize / 2;
     }
 
     // Getters and setters
@@ -222,12 +283,12 @@ export default class BarChart extends HTMLElement {
     }
 
     // Invoked when one of the custom element's attributes is added, removed, or changed.
-    attributeChangedCallback(name, oldValue, newValue) {}
+    attributeChangedCallback(name, oldValue, newValue) { }
 
     // Invoked when the custom element is disconnected from the document's DOM.
-    disconnectedCallback() {}
+    disconnectedCallback() { }
 }
 // Register the custom element
-window.customElements.define("bar-chart", BarChart);
+window.customElements.define("line-chart", LineChart);
 
 // helpers

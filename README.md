@@ -6,14 +6,22 @@ This is a personal collection of (somewhat) useful components and simpler elemen
 
 # Custom element/component ideas
 
+- [ ] audio-paragraph
+    - extends the native p tag
+    - has a small audio icon for play state
+    - background-color changes based on play state
 - [ ] loader/progress bar
     - based on the native meter element?
         - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meter
-- [ ] simple bar charts
+- [x] simple bar charts
     - hover effects
-    - pass array of data through an attribute?
-    - or only init with javascript?
-    - use svg?
+    - pass array of data through an attribute
+        - or only init with javascript?
+    - use svg
+- [ ] pie chart
+    - use CSS conical gradient (https://www.youtube.com/watch?v=vs34f9FiHps0)
+        - it's coming in chrome 69?
+    - use svg otherwise?
 - [ ] hamburger menu / sidebar
 - [ ] progress bar
 - [ ] loader / loading animations
@@ -24,6 +32,10 @@ This is a personal collection of (somewhat) useful components and simpler elemen
     - https://github.com/niksmr/vue-masked-input
     - https://github.com/insin/inputmask-core
     - this might be too complicated
+- [ ] iframe/browser modal - opens a webpage in a modal
+    - based on the modal-window component
+- [ ] scroll to top button
+    - fixed at bottom right by default
 
 - [x] checkbox flip switch
 - [x] image carousel

@@ -71,6 +71,12 @@
             <li>
                 <a href="#bar-chart">bar-chart</a>
             </li>
+            <li>
+                <a href="#line-chart">line-chart</a>
+            </li>
+            <li>
+                <a href="#browser-modal-window">browser-modal-window</a>
+            </li>
         </ul>
         <h3>Relevant links</h3>
         <ul>
@@ -98,7 +104,7 @@
                 <h1>HTML5 Custom Elements Collection</h1>
 
                 <p>This page contains a list of (somewhat) useful or interesting Custom Elements.
-                    <br/>Include the Javascript of the desired element in your page, and use the HTML and/or JS snippets below each element.</p>
+                    <br />Include the Javascript of the desired element in your page, and use the HTML and/or JS snippets below each element.</p>
                 <p>The code was created to conform to the HTML5 Custom Elements API as of May, 2018.</p>
 
                 <h2 id="how-to">How to use them</h2>
@@ -184,7 +190,7 @@ import "./customelements/counter.js"</pre>
             <div id="digital-clock">
                 <h2>digital-clock</h2>
                 <digital-clock></digital-clock>
-                <br/>
+                <br />
                 <digital-clock clock-seconds="false"></digital-clock>
                 <div>
                     <table>
@@ -221,9 +227,9 @@ import "./customelements/counter.js"</pre>
             <div id="current-date">
                 <h2>current-date</h2>
                 <current-date></current-date>
-                <br/>
+                <br />
                 <current-date date-string="true"></current-date>
-                <br/>
+                <br />
                 <current-date date-string="true" date-timestamp="1231231231"></current-date>
                 <div>
                     <table>
@@ -243,7 +249,7 @@ import "./customelements/counter.js"</pre>
                             <td>"false"</td>
                             <td>optional</td>
                             <td>show the date as a localized date string
-                                <br/>(based on browser preferences)</td>
+                                <br />(based on browser preferences)</td>
                         </tr>
                         <tr>
                             <td>date-timestamp</td>
@@ -302,7 +308,7 @@ import "./customelements/counter.js"</pre>
                             <td>optional</td>
                             <td>text to use for the
                                 <em>cancel</em> button
-                                <br/>
+                                <br />
                                 <u>If emitted</u>, the modal will not have a cancel button
                             </td>
                         </tr>
@@ -522,10 +528,10 @@ let inputFile = myImagePreview.file;</pre>
                 <h2>tooltip-wrapper</h2>
                 <tooltip-wrapper original-text="Please don't hover over me. I'm hiding something...">
                     <strong>Oh no ...</strong>
-                    <br/>I'm revealed!
+                    <br />I'm revealed!
                 </tooltip-wrapper>
-                <br/>
-                <br/>
+                <br />
+                <br />
                 <em>Important</em>&nbsp;
                 <tooltip-wrapper original-text="<img src='assets/info.png' style='width:20px;'>">
                     <strong>Wow!</strong>
@@ -607,7 +613,7 @@ let inputFile = myImagePreview.file;</pre>
                 </textarea-autosize>
                 <p>
                     <strong>
-                        auto downsize ?!
+                        Todo: auto downsize
                     </strong>
                 </p>
                 <div>
@@ -755,9 +761,11 @@ let inputFile = myImagePreview.file;</pre>
                 <input type="text" is="history-input">
                 <p>
                     <strong>
-                        history length attribute !!
-                        <br>-1 = infinite
+                        Todo: history length attribute (-1 = infinite)
                     </strong>
+                </p>
+                <p>
+                    <em>FIXME: add docs</em>
                 </p>
                 <div>
                     <table>
@@ -863,11 +871,152 @@ mySwitch.removeAttribute("disabled");</pre>
 
             <div id="bar-chart">
                 <h2>bar-chart</h2>
-                <bar-chart data-chart="[12,13,15]"></bar-chart>
+                <pre class="prettyprint lang-json linenums">[20, 15, 10, 5, 8, 20, 12, 15, 40, 22, 15]</pre>
+                <bar-chart chart-data='[20, 15, 10, 5, 8, 20, 12, 15, 40, 22, 15]' chart-title="Example chart"></bar-chart>
+                <pre class="prettyprint lang-json linenums">[
+    { "label": "Row #1", "value": 33, "color": "#123" }, 
+    { "label": "My awesome row", "value": 12, "color": "rgba(125, 125, 0, 0.6)" },
+    { "label": "Custom label", "value": 20, "color": "limegreen" },
+    { "label": "Default color", "value": 14}
+]</pre>
+                <bar-chart chart-data='[{ "label": "Row #1", "value": 33, "color": "#123" }, { "label": "My awesome row", "value": 12, "color": "rgba(125, 125, 0, 0.6)" }, { "label": "Custom label", "value": 20, "color": "limegreen" }, { "label": "Default color", "value": 14}]' chart-title="Another example chart"></bar-chart>
+                <pre class="prettyprint lang-json linenums">["a", 20, 12] <- this is invalid</pre>
+                <bar-chart chart-data='["a", 20, 12]' chart-title="My chart with an error"></bar-chart>
+
+                <p>
+                    <strong>FIXME: add docs</strong>
+                </p>
+                <div>
+                    <table>
+                        <tr>
+                            <td colspan="5">Attributes</td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Optional</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td colspan="5" style="text-align: center">
+                                <em>no custom attributes defined yet</em>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
 
 
 
+
+            <div id="line-chart">
+                <h2>line-chart</h2>
+                <pre class="prettyprint lang-json linenums">[0, 3, 70, 9, 10, 4, 0, 15, 40, 22, 15]</pre>
+                <line-chart chart-data='[0,3,70,9,10,4,0,15,40,22,15]' chart-title="Example chart" data-width="500" data-height="200">
+                </line-chart>
+                <pre class="prettyprint lang-json linenums">[
+    { "label": "Row #1", "value": 33, "color": "#c33" },
+    { "label": "My awesome row", "value": 12, "color": "rgba(125, 125, 0, 0.5)" },
+    { "label": "Custom label", "value": 20, "color": "limegreen" },
+    { "label": "Default color", "value": 14}
+]</pre>
+                <line-chart chart-data='[{ "label": "Point #1", "value": 33, "color": "#c33" }, { "label": "My awesome data point", "value": 12, "color": "rgba(125, 125, 0, 0.5)" }, { "label": "Custom label", "value": 20, "color": "limegreen" }, { "label": "Default color", "value": 14}]' chart-title="Another example chart" data-width="500" data-height="200">
+                </line-chart>
+                <pre class="prettyprint lang-json linenums">["a", 20, 12] <- this is invalid</pre>
+                <line-chart chart-data='["a", 20, 12]' chart-title="My chart with an error"></line-chart>
+
+                <div>
+                    <table>
+                        <tr>
+                            <td colspan="5">Attributes</td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Optional</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td colspan="5" style="text-align: center">
+                                <em>no custom attributes defined yet</em>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div id="browser-modal-window">
+                <h2>modal-window</h2>
+                <browser-modal-window open-url="https://google.com"></browser-modal-window>
+                <button id="open-browser-modal-window">Open modal</button>
+                <div>
+                    <table>
+                        <tr>
+                            <td colspan="5">Attributes</td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Optional</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>modal-accept</td>
+                            <td>string</td>
+                            <td>"Accept"</td>
+                            <td>required</td>
+                            <td>text to use for the
+                                <em>accept</em> button</td>
+                        </tr>
+                        <tr>
+                            <td>modal-cancel</td>
+                            <td>string</td>
+                            <td>"Cancel"</td>
+                            <td>optional</td>
+                            <td>text to use for the
+                                <em>cancel</em> button
+                                <br />
+                                <u>If emitted</u>, the modal will not have a cancel button
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>modal-background</td>
+                            <td>boolean</td>
+                            <td>"false"</td>
+                            <td>optional</td>
+                            <td>allow the background to fade</td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <pre class="prettyprint linenums lang-html">&lt;modal-window browser-modal-window="Sure!" modal-cancel="Naaah" modal-background="true">
+                &lt;strong>Hi! This is a modal.&lt;/strong>
+                &lt;p>Here, you can write anything you want 
+                your users to know before proceeding forward.&lt;/p>
+                &lt;em>Maybe answer some questions as well?&lt;/em>
+            &lt;/modal-window></pre>
+                    <pre class="prettyprint linenums lang-js">let myModal = document.getElementsByTagName("modal-window")[0];
+
+// Add callback functions to the buttons (accept, cancel)
+myModal.defineCallbacks(
+    function () {
+        console.log("modal-window: 'OK'");
+    },
+    function () {
+        console.log("modal-window: 'cancel'");
+    }
+);
+
+// Test button
+document.getElementById("open-modal-window")
+    .addEventListener("click", function () {
+        myModal.showModal();
+    });</pre>
+                </div>
+            </div>
 
 
 
@@ -885,6 +1034,7 @@ mySwitch.removeAttribute("disabled");</pre>
                 </p>
             </div>
         </footer>
+
     </div>
 
     <!-- entry point -->
